@@ -5,10 +5,10 @@ class Database
     private $connection;
     private static $instance = null; // Instance PDO pour éviter plusieurs connexions
 
-    private $host = 'localhost'; // Hôte de la base de données (souvent localhost)
-    private $dbname = 'gestion_reservations2'; // Nom de votre base de données
-    private $username = 'root'; // Utilisateur de la base de données
-    private $password = ''; // Mot de passe de l'utilisateur
+    private $host = 'localhost'; 
+    private $dbname = 'gestion_reservations2'; 
+    private $username = 'root'; 
+    private $password = ''; 
 
     // Constructeur privé pour éviter l'instanciation directe
     private function __construct()

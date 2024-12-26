@@ -20,9 +20,11 @@ CREATE TABLE USERS (
 CREATE TABLE ACTIVITES (
     id_activite int(11) AUTO_INCREMENT PRIMARY KEY,
     titre varchar(250) NOT NULL,
-    description text,
+    description varchar (150),
     prix decimal(10,2) NOT NULL,
-    disponible BOOLEAN DEFAULT TRUE,
+    place_disponible int (11) NOT NULL,
+    DATE_DEBUT date,
+    DATE_FIN date,
     date_creation timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
