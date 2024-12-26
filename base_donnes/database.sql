@@ -36,3 +36,5 @@ CREATE TABLE RESERVATIONS (
     FOREIGN KEY (id_user) REFERENCES USERS(id_user),
     FOREIGN KEY (id_activite) REFERENCES ACTIVITES(id_activite)
 );
+
+insert 
