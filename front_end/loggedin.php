@@ -15,24 +15,21 @@
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
   </a>
   <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-  <a href="../login/signin.php" class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none font-medium rounded-lg text-base px-6 py-3 text-center dark:bg-orange-500 dark:hover:bg-orange-600">
-    Sign In
-</a>
-<button id="burger-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+        <button id="burger-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
         <span class="sr-only">Open menu</span>
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M3 5h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 7h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm0 7h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" clip-rule="evenodd" />
         </svg>
       </button>
-</div>
+    </div>
 
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
   <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:border-gray-700">
   <li >
-        <a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
+        <a href="../front_end/loggedin.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
       </li>
       <li>
-        <a href="../login/signin.php" class="text-white hover:text-orange-500 transition duration-300">Reservation</a>
+        <a href="../front_end/reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reservation</a>
       </li>
       <li>
         <a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a>
@@ -48,7 +45,7 @@
                     <a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
                 </li>
                 <li>
-                    <a href="../front_end/signin.php" class="text-white hover:text-orange-500 transition duration-300">Reserver</a>
+                    <a href="../front_end/reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reserver</a>
                 </li>
                 <li>
                     <a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a>
@@ -118,7 +115,7 @@
     </div>
   </div>
   <div class="flex justify-center mt-8 mb-8">
-    <a href="../login/signin.php" class="w-full md:w-auto bg-orange-500 text-white py-4 px-8 rounded-lg font-semibold hover:bg-gradient-to-l hover:bg-orange-600 transition duration-300 text-center block">Réserver Une Activité</a>
+    <a href="../front_end/reservation.php" class="w-full md:w-auto bg-orange-500 text-white py-4 px-8 rounded-lg font-semibold hover:bg-gradient-to-l hover:bg-orange-600 transition duration-300 text-center block">Réserver Une Activité</a>
   </div>
 </section>
 
@@ -132,7 +129,7 @@
                     <h3 class="text-xl font-semibold mb-4">Navigation</h3>
                     <ul class="space-y-2">
                         <li><a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a></li>
-                        <li><a href="../front_end/signin.php" class="text-white hover:text-orange-500 transition duration-300">Réservations</a></li>
+                        <li><a href="../front_end/reservation.php" class="text-white hover:text-orange-500 transition duration-300">Réservations</a></li>
                         <li><a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a></li>
                     </ul>
                 </div>

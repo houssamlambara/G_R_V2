@@ -26,7 +26,7 @@
             <ul class="space-y-2 font-medium">
               <li>
                 <a
-                  href="activities.php"
+                  href="activite.php"
                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <svg
                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -54,22 +54,6 @@
                       d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                   </svg>
                   <span class="flex-1 ms-3 whitespace-nowrap">Clients list</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="ActiviteList.php"
-                  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <svg
-                    class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 18 20">
-                    <path
-                      d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
-                  </svg>
-                  <span class="flex-1 ms-3 whitespace-nowrap">Activity list</span>
                 </a>
               </li>
               <li>
@@ -140,41 +124,63 @@
                     </svg>
                     Add New Activity
                 </button>
+                <?php
+require_once('../db.php'); // Include database connection
+// Create a new database connection
+$database = new Database();
+$conn = $database->getConnection();
 
-                <!-- Activities Table -->
-                <div class="mb-4 overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-left text-gray-500">
-                        <thead class="text-xs text-gray-700 uppercase bg-orange-200">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">Title</th>
-                                <th scope="col" class="px-6 py-3">Description</th>
-                                <th scope="col" class="px-6 py-3">Destination</th>
-                                <th scope="col" class="px-6 py-3">Start Date</th>
-                                <th scope="col" class="px-6 py-3">End Date</th>
-                                <th scope="col" class="px-6 py-3">Available Places</th>
-                                <th scope="col" class="px-6 py-3">Price</th>
-                                <th scope="col" class="px-6 py-3">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="bg-white border-b hover:bg-gray-50">
-                                <td class="px-6 py-4 font-medium text-gray-900">Paris Tour</td>
-                                <td class="px-6 py-4">Discover Paris...</td>
-                                <td class="px-6 py-4">Paris, France</td>
-                                <td class="px-6 py-4">2024-01-15</td>
-                                <td class="px-6 py-4">2024-01-20</td>
-                                <td class="px-6 py-4">15</td>
-                                <td class="px-6 py-4">$999</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex gap-2">
-                                        <button class="text-blue-600 hover:text-blue-900">Edit</button>
-                                        <button class="text-red-600 hover:text-red-900">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+// Query to fetch all activities
+$query = "SELECT * FROM ACTIVITES";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+
+// Fetch all activities
+$activities = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<div class="mb-4 overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-orange-200">
+            <tr>
+                <th scope="col" class="px-6 py-3">Title</th>
+                <th scope="col" class="px-6 py-3">Description</th>
+                <th scope="col" class="px-6 py-3">Destination</th>
+                <th scope="col" class="px-6 py-3">Start Date</th>
+                <th scope="col" class="px-6 py-3">End Date</th>
+                <th scope="col" class="px-6 py-3">Available Places</th>
+                <th scope="col" class="px-6 py-3">Price</th>
+                <th scope="col" class="px-6 py-3">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($activities as $activity): ?>
+                <tr class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4 font-medium text-gray-900"><?= htmlspecialchars($activity['titre']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['description']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['destination']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['DATE_DEBUT']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['DATE_FIN']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['place_disponible']) ?></td>
+                    <td class="px-6 py-4">$<?= number_format($activity['prix'], 2) ?></td>
+                    <td class="px-6 py-4">
+    <div class="flex gap-2">
+        <!-- Edit Button -->
+        <a href="edit_activity.php?id=<?= $activity['id_activite'] ?>" class="text-blue-600 hover:text-blue-900">Edit</a>
+        
+        <!-- Delete Button -->
+        <form action="../back_end/helpers/delete_act.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this activity?');">
+            <input type="hidden" name="id" value="<?= $activity['id_activite'] ?>">
+            <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+        </form>
+    </div>
+</td>
+
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
             </div>
         </div>
 
@@ -191,46 +197,46 @@
                           </svg>
                       </button>
                   </div>
-                  <form class="p-4 md:p-5" action="" method="post">
-    <div class="grid gap-4 mb-4 grid-cols-2">
-        <div class="col-span-2 sm:col-span-1">
-            <label class="block mb-2 text-sm font-medium text-gray-900">Title</label>
-            <input name="title" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Name" required />
-        </div>
-        <div class="col-span-2 sm:col-span-1">
-            <label class="block mb-2 text-sm font-medium text-gray-900">Destination</label>
-            <input name="dest" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Destination" required />
-        </div>
-        <div class="col-span-2">
-            <label class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-            <textarea name="desc" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"></textarea>
-        </div>
-        <div class="col-span-2 sm:col-span-1">
-            <label class="block text-sm font-medium text-gray-900">Date Debut</label>
-            <input type="date" name="dateDebut" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
-        </div>
-        <div class="col-span-2 sm:col-span-1">
-            <label class="block text-sm font-medium text-gray-900">Date Fin</label>
-            <input type="date" name="dateFin" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
-        </div>
-        <div class="col-span-2 sm:col-span-1">
-            <label class="block mb-2 text-sm font-medium text-gray-900">Price</label>
-            <input name="price" type="number" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Price" required />
-        </div>
-        <div class="col-span-2 sm:col-span-1">
-            <label class="block mb-2 text-sm font-medium text-gray-900">Places disponibles</label>
-            <input name="places" type="number" min="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Places disponibles" required />
-        </div>
-    </div>
-    <div class="flex items-center justify-end gap-2 pt-2">
-        <button type="button" onclick="closeModal()" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5">
-            Cancel
-        </button>
-        <button type="submit" name="valider" class="text-gray-700 bg-white hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
-            Add Activity
-        </button>
-    </div>
-</form>
+                  <form class="p-4 md:p-5" action="../back_end/helpers/act.php" method="post">
+                      <div class="grid gap-4 mb-4 grid-cols-2">
+                          <div class="col-span-2 sm:col-span-1">
+                              <label class="block mb-2 text-sm font-medium text-gray-900">Title</label>
+                              <input name="title" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Name" required="" />
+                          </div>
+                          <div class="col-span-2 sm:col-span-1">
+                              <label class="block mb-2 text-sm font-medium text-gray-900">Destination</label>
+                              <input name="dest" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Destination" required="" />
+                          </div>
+                          <div class="col-span-2">
+                              <label class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                              <textarea name="desc" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"></textarea>
+                          </div>
+                          <div class="col-span-2 sm:col-span-1">
+                              <label class="block text-sm font-medium text-gray-900">Date Debut</label>
+                              <input type="date" name="dateDebut" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
+                          </div>
+                          <div class="col-span-2 sm:col-span-1">
+                              <label class="block text-sm font-medium text-gray-900">Date Fin</label>
+                              <input type="date" name="dateFin" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
+                          </div>
+                          <div class="col-span-2 sm:col-span-1">
+                              <label class="block mb-2 text-sm font-medium text-gray-900">Price</label>
+                              <input name="price" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Price" required="" />
+                          </div>
+                          <div class="col-span-2 sm:col-span-1">
+                              <label class="block mb-2 text-sm font-medium text-gray-900">Places disponibles</label>
+                              <input name="places" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Places disponibles" required="" />
+                          </div>
+                      </div>
+                      <div class="flex items-center justify-end gap-2 pt-2">
+                          <button type="button" onclick="closeModal()" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5">
+                              Cancel
+                          </button>
+                          <button type="submit" class="text-gray-700 bg-white hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                              Add Activity
+                          </button>
+                      </div>
+                  </form>
               </div>
           </div>
         </div>

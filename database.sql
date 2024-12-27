@@ -38,8 +38,8 @@ CREATE TABLE RESERVATIONS (
     total_prix decimal(10,2) NOT NULL,
     FOREIGN KEY (id_user) REFERENCES USERS(id_user),
     FOREIGN KEY (id_activite) REFERENCES ACTIVITES(id_activite)
-);
+);  
 
-insert into role values(1 , "superAdmin") ; 
-insert into role values(2 , "admin") ; 
-insert into role values (3 , "client") ;
+insert into ROLE values(1 , "superAdmin") ; 
+insert into ROLE values(2 , "admin") ; 
+insert into ROLE values (3 , "client") ;

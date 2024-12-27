@@ -5,20 +5,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login"])) {
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
 
-    if (empty($email) || empty($password)) {
-        echo "Veuillez remplir tous les champs.";
-    } else {
         $logUser = new User("", $email, $password, "");
 
         $auth = $logUser->signin($email, $password);
 
         if ($auth) {
-            header('Location: ../front_end/activite.php');
+            header('Location: ../front_end/loggedin.php');
             exit;
         } else {
-            echo "Email ou mot de passe invalide.";
+            echo "<p class='text-red-600 text-center'>Email ou mot de passe invalide. Veuillez réessayer.</p>";
         }
-    }
 }
 ?>
 
@@ -53,9 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login"])) {
           <a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
         </li>
         <li>
-          <a href="../front_end/reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reservation</a>
-        </li>
-        <li>
           <a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a>
         </li>
       </ul>
@@ -65,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login"])) {
       <div id="mobile-menu" class="hidden md:hidden bg-black w-full shadow-lg mt-4 p-6">
         <ul class="space-y-4">
           <li><a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a></li>
-          <li><a href="../front_end/reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reserver</a></li>
           <li><a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a></li>
         </ul>
       </div>
