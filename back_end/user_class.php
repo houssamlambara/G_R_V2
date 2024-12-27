@@ -28,23 +28,23 @@ class User {
 
     public function signup($username, $email, $password, $telephone)
     {
-        if (empty($this->username) || empty($this->email) || empty($this->password) || empty($this->telephone)) {
+        if (empty($username) || empty($email) || empty($password) || empty($telephone)) {
             return "All fields are required";
         }
 
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return "Invalid email format";
         }
 
         $stmt = $this->conn->prepare("SELECT email FROM USERS WHERE email = ?");
-        $stmt->bindParam(1, $this->email);
+        $stmt->bindParam(1, $email);
         $stmt->execute();
         
         if ($stmt->rowCount() > 0) {
             return "Email already exists";
         }
 
-        $hashed_password = password_hash($this->password, PASSWORD_DEFAULT);
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $this->conn->prepare("INSERT INTO USERS (username, email, password, telephone) VALUES (?, ?, ?, ?)");
         $stmt->bindParam(1, $this->username);
@@ -62,16 +62,11 @@ class User {
 
     public function signin($email, $password)
     {
-        try {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                return "Invalid email format";
-            }
-
-            $stmt = $this->conn->prepare("SELECT * FROM USERS WHERE email = ?");
-            $stmt->bindParam(1, $email);
-            $stmt->execute();
-            
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare("SELECT * FROM USERS WHERE email = ?");
+        $stmt->bindParam(1, $email);
+        $stmt->execute();
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result && password_verify($password, $result['password'])) {
             return true; // Login successful
