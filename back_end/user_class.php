@@ -2,7 +2,7 @@
 
 include('../db.php');
 
-class User{
+class User {
     protected $id_user;
     protected $username;
     protected $email;
@@ -10,7 +10,7 @@ class User{
     protected $telephone;
     private $conn;
 
-    public function __construct($username, $email, $password, $telephone)
+    public function __construct($username = "", $email = "", $password = "", $telephone = "")
     {
         $this->username = $username;
         $this->email = $email;
@@ -26,7 +26,7 @@ class User{
         return "Nom: {$this->username}, Email: {$this->email}, Téléphone: {$this->telephone}";   
     }
 
-   public  function signup($username, $email, $password, $telephone)
+    public function signup($username, $email, $password, $telephone)
     {
         if (empty($username) || empty($email) || empty($password) || empty($telephone)) {
             return "All fields are required";
@@ -49,7 +49,7 @@ class User{
         $stmt = $this->conn->prepare("INSERT INTO USERS (username, email, password, telephone) VALUES (?, ?, ?, ?)");
         $stmt->bindParam(1, $this->username);
         $stmt->bindParam(2, $this->email);
-        $stmt->bindParam(3, $this->password);
+        $stmt->bindParam(3, $hashed_password);
         $stmt->bindParam(4, $this->telephone);
 
         if ($stmt->execute()) {
@@ -68,14 +68,12 @@ class User{
         
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result > 0 && $password==$result['password']) {
-            return "Login successful";
-      
+        if ($result && password_verify($password, $result['password'])) {
+            return true; // Login successful
         } else {
-            return "Invalid email or password";
+            return false; // Invalid email or password
         }
     }
-
 }
 
 ?>
