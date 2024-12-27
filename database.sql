@@ -40,4 +40,6 @@ CREATE TABLE RESERVATIONS (
     FOREIGN KEY (id_activite) REFERENCES ACTIVITES(id_activite)
 );
 
-insert 
+insert into role values(1 , "superAdmin") ; 
+insert into role values(2 , "admin") ; 
+insert into role values (3 , "client") ;
