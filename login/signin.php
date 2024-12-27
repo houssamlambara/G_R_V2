@@ -4,34 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Sign IN</title>
+    <title>Sign UP</title>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
 <nav class="bg-white dark:bg-black">
   <div class="flex flex-wrap items-center justify-between mx-auto p-4">
-  <a href="../front_end/index.php" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <a href="../front_end/index.php" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="img/logo_cuisine.png" class="h-16" alt="Logo" />
-      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
-  </a>
-  <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-  <a href="../login/signup.php" class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none font-medium rounded-lg text-base px-6 py-3 text-center dark:bg-orange-500 dark:hover:bg-orange-600">
-    Sign Up</a>
-<button id="burger-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+    </a>
+    <div class="flex md:order-2 space-x-3 rtl:space-x-reverse">
+      <a href="../login/signup.php" class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none font-medium rounded-lg text-base px-6 py-3">Sign Up</a>
+      <button id="burger-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none">
         <span class="sr-only">Open menu</span>
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M3 5h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 7h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm0 7h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" clip-rule="evenodd" />
         </svg>
       </button>
-</div>
+    </div>
 
-  <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
   <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:border-gray-700">
   <li >
         <a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
       </li>
       <li>
-        <a href="./reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reservation</a>
+        <a href="../front_end/reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reservation</a>
       </li>
       <li>
         <a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a>
@@ -40,21 +38,15 @@
   </div>
   </div>
 
-  <div id="mobile-menu" class="md:hidden hidden bg-black w-full shadow-lg mt-4 p-6">
-
-            <ul class="space-y-4">
-                <li>
-                    <a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
-                </li>
-                <li>
-                    <a href="./reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reserver</a>
-                </li>
-                <li>
-                    <a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-black w-full shadow-lg mt-4 p-6">
+      <ul class="space-y-4">
+        <li><a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a></li>
+        <li><a href="../front_end/reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reserver</a></li>
+        <li><a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <section class="py-16">
   <div class="mx-auto max-w-md bg-gray-200 p-8 rounded-lg shadow-lg">

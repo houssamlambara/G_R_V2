@@ -192,45 +192,45 @@
                       </button>
                   </div>
                   <form class="p-4 md:p-5" action="" method="post">
-                      <div class="grid gap-4 mb-4 grid-cols-2">
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Title</label>
-                              <input name="title" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Name" required="" />
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Destination</label>
-                              <input name="dest" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Destination" required="" />
-                          </div>
-                          <div class="col-span-2">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                              <textarea name="desc" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"></textarea>
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block text-sm font-medium text-gray-900">Date Debut</label>
-                              <input type="date" name="dateDebut" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block text-sm font-medium text-gray-900">Date Fin</label>
-                              <input type="date" name="dateFin" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                              <input name="price" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Price" required="" />
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Places disponibles</label>
-                              <input name="places" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Places disponibles" required="" />
-                          </div>
-                      </div>
-                      <div class="flex items-center justify-end gap-2 pt-2">
-                          <button type="button" onclick="closeModal()" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5">
-                              Cancel
-                          </button>
-                          <button type="submit" class="text-gray-700 bg-white hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                              Add Activity
-                          </button>
-                      </div>
-                  </form>
+    <div class="grid gap-4 mb-4 grid-cols-2">
+        <div class="col-span-2 sm:col-span-1">
+            <label class="block mb-2 text-sm font-medium text-gray-900">Title</label>
+            <input name="title" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Name" required />
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+            <label class="block mb-2 text-sm font-medium text-gray-900">Destination</label>
+            <input name="dest" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Destination" required />
+        </div>
+        <div class="col-span-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+            <textarea name="desc" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"></textarea>
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+            <label class="block text-sm font-medium text-gray-900">Date Debut</label>
+            <input type="date" name="dateDebut" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+            <label class="block text-sm font-medium text-gray-900">Date Fin</label>
+            <input type="date" name="dateFin" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+            <label class="block mb-2 text-sm font-medium text-gray-900">Price</label>
+            <input name="price" type="number" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Price" required />
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+            <label class="block mb-2 text-sm font-medium text-gray-900">Places disponibles</label>
+            <input name="places" type="number" min="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Places disponibles" required />
+        </div>
+    </div>
+    <div class="flex items-center justify-end gap-2 pt-2">
+        <button type="button" onclick="closeModal()" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5">
+            Cancel
+        </button>
+        <button type="submit" name="valider" class="text-gray-700 bg-white hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+            Add Activity
+        </button>
+    </div>
+</form>
               </div>
           </div>
         </div>
