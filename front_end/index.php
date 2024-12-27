@@ -32,6 +32,9 @@
         <a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
       </li>
       <li>
+                    <a href="../front_end/activite.php" class="text-white hover:text-orange-500 transition duration-300">Activite</a>
+                </li>
+      <li>
         <a href="./reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reservation</a>
       </li>
       <li>

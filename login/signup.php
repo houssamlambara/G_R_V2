@@ -12,7 +12,6 @@
   <div class="flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="../front_end/index.php" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="img/logo_cuisine.png" class="h-16" alt="Logo" />
-      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Le Chef</span>
     </a>
     <div class="flex md:order-2 space-x-3 rtl:space-x-reverse">
       <a href="../login/signin.php" class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none font-medium rounded-lg text-base px-6 py-3">Sign In</a>
@@ -23,6 +22,21 @@
         </svg>
       </button>
     </div>
+
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+  <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:border-gray-700">
+  <li >
+        <a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
+      </li>
+      <li>
+        <a href="./reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reservation</a>
+      </li>
+      <li>
+        <a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a>
+      </li>
+    </ul>
+  </div>
+  </div>
 
     <div id="mobile-menu" class="hidden md:hidden bg-black w-full shadow-lg mt-4 p-6">
       <ul class="space-y-4">
@@ -62,7 +76,7 @@
         <button type="submit" class="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500">Créer un compte</button>
       </div>
     </form>
-    <p class="mt-4 text-center text-gray-600">Vous avez déjà un compte ? <a href="./signin.php" class="text-orange-600 hover:text-orange-700 font-semibold">Se connecter</a></p>
+    <p class="mt-4 text-center text-gray-600">Vous avez déjà un compte ? <a href="../login/signin.php" class="text-orange-600 hover:text-orange-700 font-semibold">Se connecter</a></p>
   </div>
 
   <?php

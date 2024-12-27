@@ -10,7 +10,7 @@ class User {
     protected $telephone;
     private $conn;
 
-    public function __construct($username, $email, $password, $telephone) 
+    public function __construct($username = "", $email = "", $password = "", $telephone = "")
     {
         $this->username = $username;
         $this->email = $email;
@@ -26,7 +26,7 @@ class User {
         return "Nom: {$this->username}, Email: {$this->email}, Téléphone: {$this->telephone}";   
     }
 
-    public function signup()  // Removed redundant parameters
+    public function signup($username, $email, $password, $telephone)
     {
         if (empty($this->username) || empty($this->email) || empty($this->password) || empty($this->telephone)) {
             return "All fields are required";
@@ -49,7 +49,7 @@ class User {
         $stmt = $this->conn->prepare("INSERT INTO USERS (username, email, password, telephone) VALUES (?, ?, ?, ?)");
         $stmt->bindParam(1, $this->username);
         $stmt->bindParam(2, $this->email);
-        $stmt->bindParam(3, $hashed_password);  // Use the hashed password
+        $stmt->bindParam(3, $hashed_password);
         $stmt->bindParam(4, $this->telephone);
 
         if ($stmt->execute()) {
@@ -73,23 +73,12 @@ class User {
             
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($result && password_verify($password, $result['password'])) {
-                // Start session and set session variables
-                session_start();
-                $_SESSION['user_id'] = $result['id_user'];
-                $_SESSION['username'] = $result['username'];
-                $_SESSION['email'] = $result['email'];
-                
-                // Regenerate session ID for security
-                session_regenerate_id(true);
-                
-                return ["success" => true, "message" => "Login successful", "user" => $result];
-            } 
-
-            return ["success" => false, "message" => "Invalid credentials"];
-        } catch (Exception $e) {  // Added missing catch block
-            return ["success" => false, "message" => "An error occurred: " . $e->getMessage()];
+        if ($result && password_verify($password, $result['password'])) {
+            return true; // Login successful
+        } else {
+            return false; // Invalid email or password
         }
     }
 }
+
 ?>
