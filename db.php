@@ -1,7 +1,7 @@
 <?php
     class Database {
         private $host = 'localhost'; 
-        private $dbname = 'voyage_management'; 
+        private $dbname = 'gestion_reservations2'; 
         private $username = 'root'; 
         private $password = ''; 
         private $pdo;
