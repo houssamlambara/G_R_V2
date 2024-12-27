@@ -1,23 +1,24 @@
 <?php
+session_start();
+include('../db.php');
 
-include "db.php";
-
-class User{
+class User {
     protected $id_user;
-    protected $name;
-    protected $last_name;
+    protected $username;
     protected $email;
     protected $password;
-    protected $phone;
+    protected $telephone;
+    protected $role;  // Role is an integer now
     private $conn;
 
-    public function __construct($name, $last_name, $email, $password, $phone)
+    // Constructor with role as an integer (default is 3, meaning a regular client)
+    public function __construct($username = "", $email = "", $password = "", $telephone = "", $role = 3)
     {
-        $this->name = $name;
-        $this->last_name = $last_name;
+        $this->username = $username;
         $this->email = $email;
         $this->password = $password;
-        $this->phone = $phone;
+        $this->telephone = $telephone;
+        $this->role = $role; // Default to 3 for client
 
         $database = new Database();
         $this->conn = $database->getConnection();
@@ -25,59 +26,91 @@ class User{
 
     public function __toString()
     {
-        return "Nom: {$this->name}, Prénom: {$this->last_name}, Email: {$this->email}, Téléphone: {$this->phone}";   
+        return "Nom: {$this->username}, Email: {$this->email}, Téléphone: {$this->telephone}, Role: {$this->role}";
     }
 
-    public  function signup($name, $last_name, $email, $password, $phone)
+    // Signup method with role handling as integer
+    public function signup($username, $email, $password, $telephone, $role = 3)
     {
-        if (empty($name) || empty($last_name) || empty($email) || empty($password) || empty($phone)) {
-            return ["success" => false, "message" => "All fields are required"];
+        if (empty($username) || empty($email) || empty($password) || empty($telephone)) {
+            return "All fields are required";
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return ["success" => false, "message" => "Invalid email format"];
+            return "Invalid email format";
         }
 
-        $stmt = $this->conn->prepare("SELECT email FROM users WHERE email = ?");
+        $stmt = $this->conn->prepare("SELECT email FROM USERS WHERE email = ?");
         $stmt->bindParam(1, $email);
         $stmt->execute();
-        
+
         if ($stmt->rowCount() > 0) {
-            return ["success" => false, "message" => "Email already exists"];
+            return "Email already exists";
         }
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $this->conn->prepare("INSERT INTO users (name, last_name, email, password, phone) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bindParam(1, $name);
-        $stmt->bindParam(2, $last_name);
-        $stmt->bindParam(3, $email);
-        $stmt->bindParam(4, $hashed_password);
-        $stmt->bindParam(5, $phone);
+        $stmt = $this->conn->prepare("INSERT INTO USERS (username, email, password, telephone, role_id) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bindParam(1, $this->username);
+        $stmt->bindParam(2, $this->email);
+        $stmt->bindParam(3, $hashed_password);
+        $stmt->bindParam(4, $this->telephone);
+        $stmt->bindParam(5, $this->role);  // Insert the role as an integer
 
         if ($stmt->execute()) {
             $this->id_user = $this->conn->lastInsertId();
-            return ["success" => true, "message" => "User registered successfully"];
+            return "User registered successfully";
         } else {
-            return ["success" => false, "message" => "Registration failed"];
+            return "Registration failed";
         }
     }
 
+    // Signin method with role validation as integer
     public function signin($email, $password)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM USERS WHERE email = ?");
         $stmt->bindParam(1, $email);
         $stmt->execute();
-        
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if ($user && password_verify($password, $user['password'])) {
-            return ["success" => true, "message" => "Login successful", "user" => $user];
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result && password_verify($password, $result['password'])) {
+            // Set the user's role based on the database value
+            $this->role = $result['role'];
+            return true; // Login successful
         } else {
-            return ["success" => false, "message" => "Invalid email or password"];
+            return false; // Invalid email or password
         }
     }
 
+    // Method to get the user's role as an integer
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    // Method to set a role for a user (use the integer values: 1 = superadmin, 2 = admin, 3 = client)
+    public function setRole($role)
+    {
+        $this->role = $role;
+        // Optionally, update the role in the database
+        $stmt = $this->conn->prepare("UPDATE USERS SET role = ? WHERE id_user = ?");
+        $stmt->bindParam(1, $role);
+        $stmt->bindParam(2, $this->id_user);
+        $stmt->execute();
+    }
+
+    // Helper function to map the integer role to human-readable form (optional)
+    public function getRoleName()
+    {
+        $roleNames = [
+            1 => 'Superadmin',
+            2 => 'Admin',
+            3 => 'Client'
+        ];
+
+        return isset($roleNames[$this->role]) ? $roleNames[$this->role] : 'Unknown';
+    }
 }
 
 ?>

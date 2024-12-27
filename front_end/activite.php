@@ -18,7 +18,6 @@
     </nav>
 
     <section class="relative">
-        <!-- Sidebar remains unchanged -->
         <aside
           id="separator-sidebar"
           class="absolute top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
@@ -141,41 +140,63 @@
                     </svg>
                     Add New Activity
                 </button>
+                <?php
+require_once('../db.php'); // Include database connection
+// Create a new database connection
+$database = new Database();
+$conn = $database->getConnection();
 
-                <!-- Activities Table -->
-                <div class="mb-4 overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-left text-gray-500">
-                        <thead class="text-xs text-gray-700 uppercase bg-orange-200">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">Title</th>
-                                <th scope="col" class="px-6 py-3">Description</th>
-                                <th scope="col" class="px-6 py-3">Destination</th>
-                                <th scope="col" class="px-6 py-3">Start Date</th>
-                                <th scope="col" class="px-6 py-3">End Date</th>
-                                <th scope="col" class="px-6 py-3">Available Places</th>
-                                <th scope="col" class="px-6 py-3">Price</th>
-                                <th scope="col" class="px-6 py-3">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="bg-white border-b hover:bg-gray-50">
-                                <td class="px-6 py-4 font-medium text-gray-900">Paris Tour</td>
-                                <td class="px-6 py-4">Discover Paris...</td>
-                                <td class="px-6 py-4">Paris, France</td>
-                                <td class="px-6 py-4">2024-01-15</td>
-                                <td class="px-6 py-4">2024-01-20</td>
-                                <td class="px-6 py-4">15</td>
-                                <td class="px-6 py-4">$999</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex gap-2">
-                                        <button class="text-blue-600 hover:text-blue-900">Edit</button>
-                                        <button class="text-red-600 hover:text-red-900">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+// Query to fetch all activities
+$query = "SELECT * FROM ACTIVITES";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+
+// Fetch all activities
+$activities = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<div class="mb-4 overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-orange-200">
+            <tr>
+                <th scope="col" class="px-6 py-3">Title</th>
+                <th scope="col" class="px-6 py-3">Description</th>
+                <th scope="col" class="px-6 py-3">Destination</th>
+                <th scope="col" class="px-6 py-3">Start Date</th>
+                <th scope="col" class="px-6 py-3">End Date</th>
+                <th scope="col" class="px-6 py-3">Available Places</th>
+                <th scope="col" class="px-6 py-3">Price</th>
+                <th scope="col" class="px-6 py-3">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($activities as $activity): ?>
+                <tr class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4 font-medium text-gray-900"><?= htmlspecialchars($activity['titre']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['description']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['destination']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['date_debut']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['date_fin']) ?></td>
+                    <td class="px-6 py-4"><?= htmlspecialchars($activity['place_disponible']) ?></td>
+                    <td class="px-6 py-4">$<?= number_format($activity['prix'], 2) ?></td>
+                    <td class="px-6 py-4">
+    <div class="flex gap-2">
+        <!-- Edit Button -->
+        <a href="edit_activity.php?id=<?= $activity['id_activite'] ?>" class="text-blue-600 hover:text-blue-900">Edit</a>
+        
+        <!-- Delete Button -->
+        <form action="../back_end/helpers/delete_act.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this activity?');">
+            <input type="hidden" name="id" value="<?= $activity['id_activite'] ?>">
+            <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+        </form>
+    </div>
+</td>
+
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
             </div>
         </div>
 
@@ -192,7 +213,7 @@
                           </svg>
                       </button>
                   </div>
-                  <form class="p-4 md:p-5" action="" method="post">
+                  <form class="p-4 md:p-5" action="../back_end/helpers/act.php" method="post">
                       <div class="grid gap-4 mb-4 grid-cols-2">
                           <div class="col-span-2 sm:col-span-1">
                               <label class="block mb-2 text-sm font-medium text-gray-900">Title</label>
