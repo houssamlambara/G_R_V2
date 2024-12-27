@@ -134,42 +134,58 @@
 
         <div class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-                <!-- Add Activity Button -->
-                <button onclick="openModal()" class="mb-4 bg-orange-300 hover:bg-orange-400 text-gray-700 font-bold py-2 px-4 rounded flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                    </svg>
-                    Add New Activity
-                </button>
-
-                <!-- Activities Table -->
+                <!-- User Management Table -->
                 <div class="mb-4 overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500">
                         <thead class="text-xs text-gray-700 uppercase bg-orange-200">
                             <tr>
-                                <th scope="col" class="px-6 py-3">Title</th>
-                                <th scope="col" class="px-6 py-3">Description</th>
-                                <th scope="col" class="px-6 py-3">Destination</th>
-                                <th scope="col" class="px-6 py-3">Start Date</th>
-                                <th scope="col" class="px-6 py-3">End Date</th>
-                                <th scope="col" class="px-6 py-3">Available Places</th>
-                                <th scope="col" class="px-6 py-3">Price</th>
+                                <th scope="col" class="px-6 py-3">Name</th>
+                                <th scope="col" class="px-6 py-3">Last Name</th>
+                                <th scope="col" class="px-6 py-3">Email</th>
+                                <th scope="col" class="px-6 py-3">Phone</th>
+                                <th scope="col" class="px-6 py-3">Role</th>
+                                <th scope="col" class="px-6 py-3">Status</th>
                                 <th scope="col" class="px-6 py-3">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="bg-white border-b hover:bg-gray-50">
-                                <td class="px-6 py-4 font-medium text-gray-900">Paris Tour</td>
-                                <td class="px-6 py-4">Discover Paris...</td>
-                                <td class="px-6 py-4">Paris, France</td>
-                                <td class="px-6 py-4">2024-01-15</td>
-                                <td class="px-6 py-4">2024-01-20</td>
-                                <td class="px-6 py-4">15</td>
-                                <td class="px-6 py-4">$999</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">John</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Doe</td>
+                                <td class="px-6 py-4">john@example.com</td>
+                                <td class="px-6 py-4">0759264812</td>
+                                <td class="px-6 py-4">
+                                    <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5">
+                                        <option>User</option>
+                                        <option>Admin</option>
+                                    </select>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">Active</span>
+                                </td>
                                 <td class="px-6 py-4">
                                     <div class="flex gap-2">
-                                        <button class="text-blue-600 hover:text-blue-900">Edit</button>
-                                        <button class="text-red-600 hover:text-red-900">Delete</button>
+                                        <button class="text-gray-600 hover:text-gray-900">Archive</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <td class="px-6 py-4 font-medium text-gray-900">Jane</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Smith</td>
+                                <td class="px-6 py-4">jane@example.com</td>
+                                <td class="px-6 py-4">0623687845</td>
+                                <td class="px-6 py-4">
+                                    <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5">
+                                        <option>User</option>
+                                        <option selected>Admin</option>
+                                    </select>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium text-yellow-700 bg-yellow-100 rounded-full">Archived</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex gap-2">
+                                        <button class="text-green-600 hover:text-green-900">Unarchive</button>
                                     </div>
                                 </td>
                             </tr>
@@ -178,82 +194,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div id="activityModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
-          <!-- Changed positioning and width -->
-          <div class="relative sm:ml-64 mx-auto p-5 w-full max-w-2xl mt-20">
-              <div class="bg-orange-300 rounded-lg shadow-xl">
-                  <div class="flex items-center justify-between p-4 border-b rounded-t">
-                      <h3 class="text-lg font-semibold text-gray-900">Add Activity</h3>
-                      <button onclick="closeModal()" class="text-gray-700 hover:text-gray-900">
-                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                      </button>
-                  </div>
-                  <form class="p-4 md:p-5" action="" method="post">
-                      <div class="grid gap-4 mb-4 grid-cols-2">
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Title</label>
-                              <input name="title" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Name" required="" />
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Destination</label>
-                              <input name="dest" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Destination" required="" />
-                          </div>
-                          <div class="col-span-2">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                              <textarea name="desc" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"></textarea>
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block text-sm font-medium text-gray-900">Date Debut</label>
-                              <input type="date" name="dateDebut" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block text-sm font-medium text-gray-900">Date Fin</label>
-                              <input type="date" name="dateFin" class="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" />
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                              <input name="price" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Price" required="" />
-                          </div>
-                          <div class="col-span-2 sm:col-span-1">
-                              <label class="block mb-2 text-sm font-medium text-gray-900">Places disponibles</label>
-                              <input name="places" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Places disponibles" required="" />
-                          </div>
-                      </div>
-                      <div class="flex items-center justify-end gap-2 pt-2">
-                          <button type="button" onclick="closeModal()" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5">
-                              Cancel
-                          </button>
-                          <button type="submit" class="text-gray-700 bg-white hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                              Add Activity
-                          </button>
-                      </div>
-                  </form>
-              </div>
-          </div>
-        </div>
     </section>
-
-    <script>
-        function openModal() {
-            document.getElementById('activityModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-        }
-
-        function closeModal() {
-            document.getElementById('activityModal').classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('activityModal').addEventListener('click', function(event) {
-            if (event.target === this) {
-                closeModal();
-            }
-        });
-    </script>
 </body>
 </html>
