@@ -192,7 +192,7 @@
                           </svg>
                       </button>
                   </div>
-                  <form class="p-4 md:p-5" action="addActivity.php" method="post">
+                  <form class="p-4 md:p-5" action="" method="post">
                       <div class="grid gap-4 mb-4 grid-cols-2">
                           <div class="col-span-2 sm:col-span-1">
                               <label class="block mb-2 text-sm font-medium text-gray-900">Title</label>
