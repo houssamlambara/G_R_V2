@@ -62,14 +62,15 @@ class User{
 
     public function signin($email, $password)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->bindParam(2, $email);
+        $stmt = $this->conn->prepare("SELECT * FROM USERS WHERE email = ?");
+        $stmt->bindParam(1, $email);
         $stmt->execute();
         
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if ($user && password_verify($password, $user['password'])) {
-            return ["success" => true, "message" => "Login successful", "user" => $user];
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result > 0 && $password==$result['password']) {
+            return "Login successful";
+      
         } else {
             return "Invalid email or password";
         }
