@@ -8,10 +8,10 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-<nav class="bg-white dark:bg-black">
+<nav class="bg-orange-300 dark:bg-black">
   <div class="flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="../front_end/index.php" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="img/logo_cuisine.png" class="h-16" alt="Logo" />
+      <img src="../logotravel-removebg-preview.png" class="h-16" alt="Logo" />
     </a>
     <div class="flex md:order-2 space-x-3 rtl:space-x-reverse">
       <a href="../login/signin.php" class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none font-medium rounded-lg text-base px-6 py-3">Sign In</a>
