@@ -2,7 +2,7 @@
 
 include('../db.php');
 
-class User{
+class User {
     protected $id_user;
     protected $username;
     protected $email;
@@ -10,7 +10,7 @@ class User{
     protected $telephone;
     private $conn;
 
-    public function __construct($username, $email, $password, $telephone)
+    public function __construct($username, $email, $password, $telephone) 
     {
         $this->username = $username;
         $this->email = $email;
@@ -26,30 +26,30 @@ class User{
         return "Nom: {$this->username}, Email: {$this->email}, Téléphone: {$this->telephone}";   
     }
 
-   public  function signup($username, $email, $password, $telephone)
+    public function signup()  // Removed redundant parameters
     {
-        if (empty($username) || empty($email) || empty($password) || empty($telephone)) {
+        if (empty($this->username) || empty($this->email) || empty($this->password) || empty($this->telephone)) {
             return "All fields are required";
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return "Invalid email format";
         }
 
         $stmt = $this->conn->prepare("SELECT email FROM USERS WHERE email = ?");
-        $stmt->bindParam(1, $email);
+        $stmt->bindParam(1, $this->email);
         $stmt->execute();
         
         if ($stmt->rowCount() > 0) {
             return "Email already exists";
         }
 
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $hashed_password = password_hash($this->password, PASSWORD_DEFAULT);
 
         $stmt = $this->conn->prepare("INSERT INTO USERS (username, email, password, telephone) VALUES (?, ?, ?, ?)");
         $stmt->bindParam(1, $this->username);
         $stmt->bindParam(2, $this->email);
-        $stmt->bindParam(3, $this->password);
+        $stmt->bindParam(3, $hashed_password);  // Use the hashed password
         $stmt->bindParam(4, $this->telephone);
 
         if ($stmt->execute()) {
@@ -62,20 +62,34 @@ class User{
 
     public function signin($email, $password)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM USERS WHERE email = ?");
-        $stmt->bindParam(1, $email);
-        $stmt->execute();
-        
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        try {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return "Invalid email format";
+            }
 
-        if ($result > 0 && $password==$result['password']) {
-            return "Login successful";
-      
-        } else {
-            return "Invalid email or password";
+            $stmt = $this->conn->prepare("SELECT * FROM USERS WHERE email = ?");
+            $stmt->bindParam(1, $email);
+            $stmt->execute();
+            
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result && password_verify($password, $result['password'])) {
+                // Start session and set session variables
+                session_start();
+                $_SESSION['user_id'] = $result['id_user'];
+                $_SESSION['username'] = $result['username'];
+                $_SESSION['email'] = $result['email'];
+                
+                // Regenerate session ID for security
+                session_regenerate_id(true);
+                
+                return ["success" => true, "message" => "Login successful", "user" => $result];
+            } 
+
+            return ["success" => false, "message" => "Invalid credentials"];
+        } catch (Exception $e) {  // Added missing catch block
+            return ["success" => false, "message" => "An error occurred: " . $e->getMessage()];
         }
     }
-
 }
-
 ?>
