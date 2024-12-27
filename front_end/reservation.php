@@ -80,7 +80,7 @@
     </div>
   </div>
 
-  <div class="mb-6">
+  <!-- <div class="mb-6">
   <label class="block text-black font-semibold mb-2" for="menu">Choisir un menu</label>
   <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" id="menu" name="id_menu" required>
     <option value="" disabled selected>Choisir un menu</option>
@@ -88,7 +88,8 @@
 
 
             </select>
-</div>
+</div> -->
+
 <button type="submit" class="w-full bg-orange-500 text-white py-4 rounded-lg font-semibold hover:bg-gradient-to-l hover:bg-orange-600 transition duration-300 mt-4">Réserver Maintenant</button>
 </form>
   </div>

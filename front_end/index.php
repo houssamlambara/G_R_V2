@@ -32,10 +32,10 @@
         <a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
       </li>
       <li>
-                    <a href="../front_end/activite.php" class="text-white hover:text-orange-500 transition duration-300">Activite</a>
-                </li>
+        <a href="../front_end/activite.php" class="text-white hover:text-orange-500 transition duration-300">Activite</a>
+        </li>
       <li>
-        <a href="./reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reservation</a>
+        <a href="../front_end/reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reservation</a>
       </li>
       <li>
         <a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a>
@@ -51,7 +51,7 @@
                     <a href="../front_end/index.php" class="text-white hover:text-orange-500 transition duration-300">Home</a>
                 </li>
                 <li>
-                    <a href="./reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reserver</a>
+                    <a href="../front_end/reservation.php" class="text-white hover:text-orange-500 transition duration-300">Reserver</a>
                 </li>
                 <li>
                     <a href="#" class="text-white hover:text-orange-500 transition duration-300">Contact</a>

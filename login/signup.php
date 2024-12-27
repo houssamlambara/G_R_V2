@@ -1,3 +1,6 @@
+<?php 
+  require_once('../back_end/user_class.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,8 +83,7 @@
   </div>
 
   <?php
- 
-  require_once('../back_end/user_class.php');
+
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $username = $_POST['username'] ?? '';
@@ -89,24 +91,33 @@
       $password = $_POST['password'] ?? '';
       $telephone = $_POST['telephone'] ?? '';
 
-      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-      $newUser = new User($username, $email, $hashed_password, $telephone);
-      $result = $newUser->signup($username, $email, $hashed_password, $telephone);
-
-      if ($result) {
-          session_regenerate_id();
-          $_SESSION['login'] = true;
-          $_SESSION['username'] = $username;
-          $_SESSION['email'] = $email;
-
-          echo "<p class='text-green-600 text-center'>Utilisateur enregistré avec succès !</p>";
+      if (empty($username) || empty($email) || empty($password) || empty($telephone)) {
+          echo "<p class='text-red-600 text-center'>Tous les champs sont requis.</p>";
       } else {
-          echo "<p class='text-red-600 text-center'>Une erreur est survenue. Veuillez réessayer.</p>";
+          // Hash the password
+          $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+          // Create new User object
+          $newUser = new User($username, $email, $hashed_password, $telephone);
+
+          // Call signup method to register the user
+          $result = $newUser->signup($username, $email, $hashed_password, $telephone);
+
+          if ($result === "User registered successfully") {
+              // session_regenerate_id();
+              $_SESSION['login'] = true;
+              $_SESSION['username'] = $username;
+              $_SESSION['email'] = $email;
+
+              echo "<p class='text-green-600 text-center'>Utilisateur enregistré avec succès !</p>";
+          } else {
+              echo "<p class='text-red-600 text-center'>Une erreur est survenue. Veuillez réessayer.</p>";
+          }
       }
   }
   ?>
 </section>
+
 
 <footer class="bg-black text-white py-12">
   <div class="container mx-auto px-4">
